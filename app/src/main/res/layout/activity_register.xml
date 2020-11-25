@@ -20,7 +20,7 @@
             android:layout_marginEnd="@dimen/margin_8"
             android:elevation="@dimen/margin_8"
             android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic"
+            android:src="@mipmap/ic_movie"
             app:civ_border_color="@color/teal_700"
             app:civ_border_overlay="true"
             app:civ_border_width="@dimen/border_4"
