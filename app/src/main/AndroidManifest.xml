@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YourFavoriteMovies">
-        <activity android:name="com.jessica.yourfavoritemovies.view.HomeActivity">
+        <activity android:name=".login.RegisterActivity"
+            android:label="@string/title_activity_register"/>
+        <activity
+            android:name=".home.HomeActivity"
+            android:label="@string/title_activity_movies" />
+        <activity android:name=".favorites.FavoritesActivity" />
+        <activity android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

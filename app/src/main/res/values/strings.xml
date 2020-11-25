@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Favorite Movies</string>
-    <string name="action_logout">Sair</string>
-    <string name="action_favoritos">Favoritos</string>
+    <string name="action_logout">Exit</string>
+    <string name="action_favoritos">Favorites</string>
     <string name="action_perfil">Perfil</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_movies">Movies</string>
+    <string name="title_activity_register">Register</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="create_account">Create account</string>
 </resources>

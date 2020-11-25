@@ -1,4 +1,4 @@
-package com.jessica.yourfavoritemovies.view
+package com.jessica.yourfavoritemovies.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

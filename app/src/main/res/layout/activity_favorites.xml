@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeActivity">
+    tools:context=".favorites.FavoritesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movies"
+        android:id="@+id/rv_movies_favorites"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
         tools:listitem="@layout/item_recycler_view"/>
 
     <ProgressBar
-        android:id="@+id/pb_movies"
+        android:id="@+id/pb_movies_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8"
