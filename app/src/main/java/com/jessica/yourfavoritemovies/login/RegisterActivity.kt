@@ -7,15 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import com.jessica.yourfavoritemovies.MovieUtil.validateEmailPassword
+import com.jessica.yourfavoritemovies.MovieUtil.validateNameEmailPassword
 import com.jessica.yourfavoritemovies.R
 import com.jessica.yourfavoritemovies.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
-    private val viewModel: RegisterViewModel by lazy {
+    private val viewModel: AuthenticationViewModel by lazy {
         ViewModelProvider(this).get(
-            RegisterViewModel::class.java
+            AuthenticationViewModel::class.java
         )
     }
 
@@ -28,8 +28,10 @@ class RegisterActivity : AppCompatActivity() {
             val email = etv_email_register.text.toString()
             val password = etv_password_register.text.toString()
 
-            if (validateEmailPassword(name, email, password)) {
-                viewModel.registrarUsuario(email,password)
+            when {
+                validateNameEmailPassword(name, email, password) -> {
+                    viewModel.registrarUsuario(email,password)
+                }
             }
 
             initViewModel()
@@ -58,9 +60,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun navigateToHome(status: Boolean) {
-       if (status){
-           startActivity(Intent(this, HomeActivity::class.java))
-       }
+        when {
+            status -> {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+        }
     }
 
     private fun showErrorMessage(message: String) {

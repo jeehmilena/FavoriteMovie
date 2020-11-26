@@ -2,60 +2,56 @@ package com.jessica.yourfavoritemovies.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.jessica.yourfavoritemovies.MovieUtil.saveUserId
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.jessica.yourfavoritemovies.MovieUtil
 import com.jessica.yourfavoritemovies.R
 import com.jessica.yourfavoritemovies.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+    private val viewModel: AuthenticationViewModel by lazy {
+        ViewModelProvider(this).get(
+            AuthenticationViewModel::class.java
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         bt_login.setOnClickListener {
-            loginEmail()
+            val email = etv_email.text.toString()
+            val password = etv_password.text.toString()
+
+            when {
+                MovieUtil.validateEmailPassword(email, password) -> {
+                    viewModel.loginEmail(email, password)
+                }
+            }
         }
 
         tv_login_register.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
+        initViewModel()
     }
 
-
-    fun loginEmail() {
-        val email: String = etv_email.text.toString()
-        val password: String = etv_password.text.toString()
-
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Campos não podem ser vazios :(", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // tentamos fazer o login com o email e senha no firebase
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task: Task<AuthResult?> ->
-
-                // Caso login com sucesso vamos para tela  Home
-                if (task.isSuccessful) {
-                    irParaHome(FirebaseAuth.getInstance().currentUser!!.uid)
-                } else {
-                    // Se deu algum erro mostramos para o usuário a mensagem
-                    Snackbar.make(bt_login, task.exception!!.message!!, Snackbar.LENGTH_LONG).show()
-                }
+    private fun initViewModel() {
+        viewModel.statusLogin.observe(this, Observer { status ->
+            status?.let {
+                navigateToHome(it)
             }
+        })
     }
 
-    private fun irParaHome(uiid: String) {
-        saveUserId(application.applicationContext, uiid)
-        startActivity(Intent(applicationContext, HomeActivity::class.java))
-        finish()
+    private fun navigateToHome(status: Boolean) {
+        when {
+            status -> {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+        }
     }
 }
