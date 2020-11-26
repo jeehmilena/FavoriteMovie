@@ -13,4 +13,9 @@
     <string name="name">Name</string>
     <string name="register">Register</string>
     <string name="create_account">Create account</string>
+    <string name="default_notification_channel_id">favoritemovie</string>
+    <string name="notification_title">Favorite Movie</string>
+    <string name="notification_text">We have new movies for you!</string>
+    <string name="notification_ok">OK!</string>
+
 </resources>
