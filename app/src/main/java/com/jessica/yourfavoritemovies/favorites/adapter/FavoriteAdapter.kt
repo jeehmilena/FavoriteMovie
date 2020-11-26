@@ -17,7 +17,6 @@ class FavoriteAdapter(
     val onClick: (item: Result) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_recycler_view, parent, false)
@@ -58,6 +57,14 @@ class FavoriteAdapter(
         val favorite = itemView.findViewById<ImageView>(R.id.iv_favorite)
 
         fun onBind(result: Result) {
+            favorite.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    itemView.resources,
+                    R.drawable.ic_favorite,
+                    null
+                )
+            )
+
             title.text = result.title
             Glide.with(itemView.context).load("${Constants.BASE_IMAGE_URL}${result.posterPath}")
                 .placeholder(R.mipmap.ic_movie)

@@ -11,7 +11,6 @@ import com.jessica.yourfavoritemovies.MovieUtil.getUserId
 import com.jessica.yourfavoritemovies.model.Result
 
 class FavoriteViewModel(application: Application): AndroidViewModel(application) {
-    var favorites = mutableListOf<Result>()
     var stateRemoveFavorite: MutableLiveData<Result> = MutableLiveData()
     var stateList: MutableLiveData<List<Result>> = MutableLiveData()
 
@@ -21,6 +20,8 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
         reference.orderByKey().addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                val favorites = mutableListOf<Result>()
 
                 for (resultSnapshot in dataSnapshot.children) {
                     val result = resultSnapshot.getValue(Result::class.java)
@@ -33,7 +34,7 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
         })
     }
 
-    fun removeFavoriteClickListener(result: com.jessica.yourfavoritemovies.model.Result) {
+    fun removeFavoriteClickListener(result: Result) {
         val database = FirebaseDatabase.getInstance()
 
         val reference = database.getReference(getUserId(getApplication()).toString() + "/favorites")
@@ -46,7 +47,6 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
 
                     if (result.id == resultFirebase?.id) {
                         resultSnapshot.ref.removeValue()
-                        result.let { favorites.remove(it) }
                         stateRemoveFavorite.value = result
                     }
                 }

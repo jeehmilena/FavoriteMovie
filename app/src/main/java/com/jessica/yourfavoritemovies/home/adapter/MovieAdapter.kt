@@ -43,16 +43,9 @@ class MovieAdapter(
 
     override fun getItemCount(): Int = listMovie.size
 
-    fun updateList(results: List<Result>) {
-        when {
-            results.isEmpty() -> {
-                this.listMovie = results as MutableList<Result>
-            }
-            else -> {
-                listMovie.addAll(results)
-                notifyDataSetChanged()
-            }
-        }
+    fun updateList(results: MutableList<Result>) {
+        listMovie = results
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -62,6 +55,15 @@ class MovieAdapter(
 
         fun onBind(result: Result) {
             title.text = result.title
+
+            favorite.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    itemView.resources,
+                    R.drawable.ic_favorite_white,
+                    null
+                )
+            )
+
             Glide.with(itemView.context).load("$BASE_IMAGE_URL${result.posterPath}")
                 .placeholder(R.mipmap.ic_movie)
                 .into(image)
