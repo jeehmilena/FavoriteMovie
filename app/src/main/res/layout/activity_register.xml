@@ -11,45 +11,25 @@
         android:background="@color/purple_700"
         tools:context=".login.view.LoginFragment">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_user_login"
-            android:layout_width="@dimen/width_100"
-            android:layout_height="@dimen/height_100"
-            android:layout_marginStart="@dimen/margin_8"
-            android:layout_marginTop="@dimen/margin_72"
-            android:layout_marginEnd="@dimen/margin_8"
-            android:elevation="@dimen/margin_8"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_movie"
-            app:civ_border_color="@color/teal_700"
-            app:civ_border_overlay="true"
-            app:civ_border_width="@dimen/border_4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_48"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:layout_marginBottom="@dimen/margin_16"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="@dimen/corner_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/civ_user_login"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ProgressBar
                 android:id="@+id/pb_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
                 android:layout_gravity="center"
-                android:visibility="gone"/>
+                android:indeterminate="true"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_24"
-                    android:layout_marginTop="@dimen/margin_96"
+                    android:layout_marginTop="@dimen/margin_24"
                     android:layout_marginEnd="@dimen/margin_24"
                     android:hint="@string/name"
                     android:inputType="text"
@@ -99,7 +79,7 @@
                     android:layout_marginTop="@dimen/margin_32"
                     android:layout_marginEnd="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_24"
-                    android:backgroundTint="@color/purple_200"
+                    android:backgroundTint="@color/teal_700"
                     android:text="@string/register"
                     android:textColor="@color/white" />
 
