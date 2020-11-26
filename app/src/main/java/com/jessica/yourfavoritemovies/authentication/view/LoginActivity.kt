@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.jessica.yourfavoritemovies.MovieUtil
 import com.jessica.yourfavoritemovies.R
-import com.jessica.yourfavoritemovies.home.HomeActivity
+import com.jessica.yourfavoritemovies.home.view.HomeActivity
 import com.jessica.yourfavoritemovies.authentication.viewmodel.AuthenticationViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel: AuthenticationViewModel by lazy {
@@ -41,9 +43,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel.statusLogin.observe(this, Observer { status ->
-            status?.let {
+        viewModel.stateLogin.observe(this, Observer { state ->
+            state?.let {
                 navigateToHome(it)
+            }
+        })
+
+
+        viewModel.error.observe(this, Observer { loading ->
+            loading?.let {
+                showErrorMessage(it)
             }
         })
     }
@@ -54,5 +63,9 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, HomeActivity::class.java))
             }
         }
+    }
+
+    private fun showErrorMessage(message: String) {
+        Snackbar.make(bt_login, message, Snackbar.LENGTH_LONG).show()
     }
 }

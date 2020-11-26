@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jessica.yourfavoritemovies">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_movie"
@@ -12,7 +15,7 @@
         <activity android:name=".authentication.view.RegisterActivity"
             android:label="@string/title_activity_register"/>
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".home.view.HomeActivity"
             android:label="@string/title_activity_movies" />
         <activity android:name=".favorites.FavoritesActivity" />
         <activity android:name=".authentication.view.LoginActivity">

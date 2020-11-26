@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.jessica.yourfavoritemovies.MovieUtil.validateNameEmailPassword
 import com.jessica.yourfavoritemovies.R
-import com.jessica.yourfavoritemovies.home.HomeActivity
+import com.jessica.yourfavoritemovies.home.view.HomeActivity
 import com.jessica.yourfavoritemovies.authentication.viewmodel.AuthenticationViewModel
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -41,8 +41,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun initViewModel() {
 
-        viewModel.statusRegister.observe(this, Observer { status ->
-            status?.let {
+        viewModel.stateRegister.observe(this, Observer { state ->
+            state?.let {
                navigateToHome(it)
             }
         })

@@ -11,8 +11,8 @@ import com.jessica.yourfavoritemovies.MovieUtil
 class AuthenticationViewModel(application: Application) : AndroidViewModel(application) {
     var loading: MutableLiveData<Boolean> = MutableLiveData()
     var error: MutableLiveData<String> = MutableLiveData()
-    var statusRegister: MutableLiveData<Boolean> = MutableLiveData()
-    var statusLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var stateRegister: MutableLiveData<Boolean> = MutableLiveData()
+    var stateLogin: MutableLiveData<Boolean> = MutableLiveData()
 
     fun registrarUsuario(email: String, password: String) {
         loading.value = true
@@ -25,11 +25,11 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
                             getApplication(),
                             FirebaseAuth.getInstance().currentUser?.uid
                         )
-                        statusRegister.value = true
+                        stateRegister.value = true
                     }
                     else -> {
                         errorMessage("Authentication Failed!")
-                        statusRegister.value = false
+                        stateRegister.value = false
                         loading.value = false
                     }
                 }
@@ -47,11 +47,11 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
                             getApplication(),
                             FirebaseAuth.getInstance().currentUser?.uid
                         )
-                        statusLogin.value = true
+                        stateLogin.value = true
                     }
                     else -> {
                         errorMessage("Authentication Failed!")
-                        statusRegister.value = false
+                        stateRegister.value = false
                         loading.value = false
                     }
                 }
