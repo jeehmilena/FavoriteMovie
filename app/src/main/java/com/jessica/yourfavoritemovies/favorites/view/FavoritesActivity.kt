@@ -1,9 +1,7 @@
 package com.jessica.yourfavoritemovies.favorites.view
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +30,8 @@ class FavoritesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowHomeEnabled(true);
         rv_movies_favorites.adapter = adapter
         rv_movies_favorites.layoutManager = GridLayoutManager(this, 2)
         viewModel.getFavorites()
@@ -69,5 +69,12 @@ class FavoritesActivity : AppCompatActivity() {
             "Removed film - ${result.title}",
             Snackbar.LENGTH_LONG
         ).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
