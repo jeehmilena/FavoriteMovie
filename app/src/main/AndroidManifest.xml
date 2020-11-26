@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_movie_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YourFavoriteMovies">
-        <activity android:name=".login.RegisterActivity"
+        <activity android:name=".authentication.view.RegisterActivity"
             android:label="@string/title_activity_register"/>
         <activity
             android:name=".home.HomeActivity"
             android:label="@string/title_activity_movies" />
         <activity android:name=".favorites.FavoritesActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".authentication.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

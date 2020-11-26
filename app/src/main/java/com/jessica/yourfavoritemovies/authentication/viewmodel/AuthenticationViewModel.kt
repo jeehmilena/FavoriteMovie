@@ -1,4 +1,4 @@
-package com.jessica.yourfavoritemovies.login
+package com.jessica.yourfavoritemovies.authentication.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

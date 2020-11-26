@@ -1,4 +1,4 @@
-package com.jessica.yourfavoritemovies.login
+package com.jessica.yourfavoritemovies.authentication.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jessica.yourfavoritemovies.MovieUtil
 import com.jessica.yourfavoritemovies.R
 import com.jessica.yourfavoritemovies.home.HomeActivity
+import com.jessica.yourfavoritemovies.authentication.viewmodel.AuthenticationViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {

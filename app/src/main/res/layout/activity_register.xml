@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple_700"
-        tools:context=".login.view.LoginFragment">
+        tools:context=".authentication.view.LoginFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_register"
