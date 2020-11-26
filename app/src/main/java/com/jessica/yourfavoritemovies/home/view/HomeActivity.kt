@@ -9,19 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.jessica.yourfavoritemovies.Constants.LANGUAGE_PT_BR
 import com.jessica.yourfavoritemovies.R
 import com.jessica.yourfavoritemovies.authentication.view.LoginActivity
-import com.jessica.yourfavoritemovies.favorites.FavoritesActivity
+import com.jessica.yourfavoritemovies.favorites.view.FavoritesActivity
 import com.jessica.yourfavoritemovies.home.adapter.MovieAdapter
 import com.jessica.yourfavoritemovies.home.viewmodel.HomeViewModel
 import com.jessica.yourfavoritemovies.model.Result
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_login.*
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by lazy {
