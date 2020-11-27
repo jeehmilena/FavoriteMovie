@@ -9,7 +9,7 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="login_failed">"Login failed!"</string>
     <string name="name">Name</string>
     <string name="register">Register</string>
     <string name="create_account">Create account</string>
@@ -17,5 +17,7 @@
     <string name="notification_title">Favorite Movie</string>
     <string name="notification_text">We have new movies for you!</string>
     <string name="notification_ok">OK!</string>
+    <string name="removed_movie">"Removed film - %s</string>
+    <string name="added_movie">"Movie added - %s</string>
 
 </resources>

@@ -1,8 +1,6 @@
 package com.jessica.yourfavoritemovies.home.viewmodel
 
 import android.app.Application
-import android.util.Log
-import androidx.constraintlayout.widget.Constraints
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,6 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.jessica.yourfavoritemovies.Constants.FAVORITES_PATH
 import com.jessica.yourfavoritemovies.MovieRepository
 import com.jessica.yourfavoritemovies.MovieUtil.getUserId
 import com.jessica.yourfavoritemovies.model.Result
@@ -44,7 +43,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun salvarFavorito(result: Result) {
         val database = FirebaseDatabase.getInstance()
         val reference =
-            database.getReference(getUserId(getApplication()).toString() + "/favorites")
+            database.getReference(getUserId(getApplication()).toString() + FAVORITES_PATH)
         val key = reference.push().key
 
         key?.let {

@@ -7,6 +7,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.jessica.yourfavoritemovies.Constants.FAVORITES_PATH
+import com.jessica.yourfavoritemovies.Constants.ID_PATH
 import com.jessica.yourfavoritemovies.MovieUtil.getUserId
 import com.jessica.yourfavoritemovies.model.Result
 
@@ -16,7 +18,7 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
 
     fun getFavorites() {
         val database = FirebaseDatabase.getInstance()
-        val reference = database.getReference(getUserId(getApplication()).toString() + "/favorites")
+        val reference = database.getReference(getUserId(getApplication()).toString() + FAVORITES_PATH)
         reference.orderByKey().addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -37,9 +39,9 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
     fun removeFavoriteClickListener(result: Result) {
         val database = FirebaseDatabase.getInstance()
 
-        val reference = database.getReference(getUserId(getApplication()).toString() + "/favorites")
+        val reference = database.getReference(getUserId(getApplication()).toString() + FAVORITES_PATH)
 
-        reference.orderByChild("id").addListenerForSingleValueEvent(object : ValueEventListener {
+        reference.orderByChild(ID_PATH).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 for (resultSnapshot in dataSnapshot.children) {

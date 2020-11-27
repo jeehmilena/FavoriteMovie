@@ -14,9 +14,9 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.jessica.yourfavoritemovies.Constants.LANGUAGE_PT_BR
 import com.jessica.yourfavoritemovies.R
+import com.jessica.yourfavoritemovies.adapter.MovieAdapter
 import com.jessica.yourfavoritemovies.authentication.view.LoginActivity
 import com.jessica.yourfavoritemovies.favorites.view.FavoritesActivity
-import com.jessica.yourfavoritemovies.home.adapter.MovieAdapter
 import com.jessica.yourfavoritemovies.home.viewmodel.HomeViewModel
 import com.jessica.yourfavoritemovies.model.Result
 import kotlinx.android.synthetic.main.activity_home.*
@@ -29,9 +29,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private val adapter: MovieAdapter by lazy {
-       MovieAdapter(
-           ArrayList(), this::favoriteMovie
-       )
+        MovieAdapter(
+            ArrayList(), this::favoriteMovie
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +40,8 @@ class HomeActivity : AppCompatActivity() {
 
         rv_movies.adapter = adapter
         rv_movies.layoutManager = GridLayoutManager(this, 2)
-        viewModel.getListMovies(LANGUAGE_PT_BR)
-
         initViewModel()
+        viewModel.getListMovies(LANGUAGE_PT_BR)
     }
 
     private fun initViewModel() {
@@ -72,21 +71,20 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun showListMovies(list: MutableList<Result>){
+    private fun showListMovies(list: MutableList<Result>) {
         adapter.updateList(list)
     }
 
-    private fun favoriteMovie(result: Result){
+    private fun favoriteMovie(result: Result) {
         viewModel.salvarFavorito(result)
     }
 
-    private fun showMessageFavorite(result: Result){
+    private fun showMessageFavorite(result: Result) {
         Snackbar.make(
             rv_movies,
-            "Movie added - ${result.title}",
+            resources.getString(R.string.added_movie, result.title),
             Snackbar.LENGTH_LONG
         ).show()
-
     }
 
     private fun showLoading(status: Boolean) {

@@ -8,10 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.jessica.yourfavoritemovies.MovieUtil
 import com.jessica.yourfavoritemovies.R
-import com.jessica.yourfavoritemovies.home.view.HomeActivity
 import com.jessica.yourfavoritemovies.authentication.viewmodel.AuthenticationViewModel
+import com.jessica.yourfavoritemovies.home.view.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel: AuthenticationViewModel by lazy {
@@ -31,6 +30,9 @@ class LoginActivity : AppCompatActivity() {
             when {
                 MovieUtil.validateEmailPassword(email, password) -> {
                     viewModel.loginEmail(email, password)
+                }
+                else -> {
+                    Snackbar.make(bt_login, resources.getString(R.string.login_failed), Snackbar.LENGTH_LONG).show()
                 }
             }
         }

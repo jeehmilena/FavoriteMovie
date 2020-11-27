@@ -1,4 +1,4 @@
-package com.jessica.yourfavoritemovies.favorites.adapter
+package com.jessica.yourfavoritemovies.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +8,14 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.jessica.yourfavoritemovies.Constants
+import com.jessica.yourfavoritemovies.Constants.BASE_IMAGE_URL
 import com.jessica.yourfavoritemovies.R
 import com.jessica.yourfavoritemovies.model.Result
 
-class FavoriteAdapter(
+class MovieAdapter(
     var listMovie: MutableList<Result>,
     val onClick: (item: Result) -> Unit
-) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -31,7 +31,7 @@ class FavoriteAdapter(
             holder.favorite.setImageDrawable(
                 ResourcesCompat.getDrawable(
                     holder.itemView.resources,
-                    R.drawable.ic_favorite_white,
+                    R.drawable.ic_favorite,
                     null
                 )
             )
@@ -57,16 +57,9 @@ class FavoriteAdapter(
         val favorite = itemView.findViewById<ImageView>(R.id.iv_favorite)
 
         fun onBind(result: Result) {
-            favorite.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    itemView.resources,
-                    R.drawable.ic_favorite,
-                    null
-                )
-            )
-
             title.text = result.title
-            Glide.with(itemView.context).load("${Constants.BASE_IMAGE_URL}${result.posterPath}")
+
+            Glide.with(itemView.context).load("$BASE_IMAGE_URL${result.posterPath}")
                 .placeholder(R.mipmap.ic_movie)
                 .into(image)
         }

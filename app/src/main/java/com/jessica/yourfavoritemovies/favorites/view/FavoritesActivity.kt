@@ -5,19 +5,18 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.jessica.yourfavoritemovies.adapter.MovieAdapter
 import com.jessica.yourfavoritemovies.R
-import com.jessica.yourfavoritemovies.favorites.adapter.FavoriteAdapter
 import com.jessica.yourfavoritemovies.favorites.viewmodel.FavoriteViewModel
 import com.jessica.yourfavoritemovies.model.Result
 import kotlinx.android.synthetic.main.activity_favorites.*
 
 class FavoritesActivity : AppCompatActivity() {
     private var resultRemove = Result()
-    private val adapter: FavoriteAdapter by lazy {
-        FavoriteAdapter(
+    private val adapter: MovieAdapter by lazy {
+        MovieAdapter(
             ArrayList(), this::removeFavoriteMovie
         )
     }
@@ -67,7 +66,7 @@ class FavoritesActivity : AppCompatActivity() {
         resultRemove = result
         Snackbar.make(
             rv_movies_favorites,
-            "Removed film - ${result.title}",
+             resources.getString(R.string.removed_movie, result.title),
             Snackbar.LENGTH_LONG
         ).show()
     }
