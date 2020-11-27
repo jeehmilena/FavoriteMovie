@@ -8,7 +8,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_700"
         tools:context=".authentication.view.LoginFragment">
 
         <androidx.cardview.widget.CardView
@@ -79,7 +78,7 @@
                     android:layout_marginTop="@dimen/margin_32"
                     android:layout_marginEnd="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_24"
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="@color/oragne_c41c00"
                     android:text="@string/register"
                     android:textColor="@color/white" />
 

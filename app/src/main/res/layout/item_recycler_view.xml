@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000">
+        android:background="#eeeeee">
 
         <ImageView
             android:id="@+id/iv_movie"
@@ -34,7 +34,7 @@
             android:layout_marginBottom="@dimen/margin_16"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iv_favorite"

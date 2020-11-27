@@ -17,7 +17,8 @@
         <activity
             android:name=".home.view.HomeActivity"
             android:label="@string/title_activity_movies" />
-        <activity android:name=".favorites.view.FavoritesActivity" />
+        <activity android:name=".favorites.view.FavoritesActivity"
+            android:label="@string/title_activity_favorites"/>
         <activity android:name=".authentication.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
