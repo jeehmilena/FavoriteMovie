@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jessica.yourfavoritemovies.R
 import com.jessica.yourfavoritemovies.favorites.adapter.FavoriteAdapter
@@ -33,7 +34,7 @@ class FavoritesActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setDisplayShowHomeEnabled(true);
         rv_movies_favorites.adapter = adapter
-        rv_movies_favorites.layoutManager = GridLayoutManager(this, 2)
+        rv_movies_favorites.layoutManager = LinearLayoutManager(this)
         viewModel.getFavorites()
         initViewModel()
     }
