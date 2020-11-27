@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
             when {
                 MovieUtil.validateEmailPassword(email, password) -> {
-                    viewModel.loginEmail(email, password)
+                    viewModel.loginEmailPassword(email, password)
                 }
                 else -> {
                     Snackbar.make(bt_login, resources.getString(R.string.login_failed), Snackbar.LENGTH_LONG).show()

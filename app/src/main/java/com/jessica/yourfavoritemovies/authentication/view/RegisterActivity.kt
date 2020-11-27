@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
 
             when {
                 validateNameEmailPassword(name, email, password) -> {
-                    viewModel.registrarUsuario(email,password)
+                    viewModel.registerUser(email,password)
                 }
             }
 

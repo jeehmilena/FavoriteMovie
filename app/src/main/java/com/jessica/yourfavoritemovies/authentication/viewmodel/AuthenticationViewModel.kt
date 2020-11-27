@@ -14,7 +14,7 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
     var stateRegister: MutableLiveData<Boolean> = MutableLiveData()
     var stateLogin: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun registrarUsuario(email: String, password: String) {
+    fun registerUser(email: String, password: String) {
         loading.value = true
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -36,7 +36,7 @@ class AuthenticationViewModel(application: Application) : AndroidViewModel(appli
             }
     }
 
-    fun loginEmail(email: String, password: String) {
+    fun loginEmailPassword(email: String, password: String) {
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task: Task<AuthResult?> ->
