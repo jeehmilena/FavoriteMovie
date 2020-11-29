@@ -19,6 +19,7 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
     fun getFavorites() {
         val database = FirebaseDatabase.getInstance()
         val reference = database.getReference(getUserId(getApplication()).toString() + FAVORITES_PATH)
+
         reference.orderByKey().addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {

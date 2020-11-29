@@ -45,23 +45,25 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
         reference.orderByKey().addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var existe = false
+                var movieAdded = false
 
                 for (resultSnapshot in dataSnapshot.children) {
                     val firebaseResult = resultSnapshot.getValue(Result::class.java)
 
-                    if (firebaseResult?.id != null &&
-                        firebaseResult.id == result.id
-                    ) {
-                        existe = true
+                    when {
+                        firebaseResult?.id != null && firebaseResult.id == result.id -> {
+                            movieAdded = true
+                        }
                     }
                 }
 
-                if (existe) {
-                    errorMessage("The movie has already been added!")
-
-                } else {
-                    checkMovieFavorited(reference, result)
+                when {
+                    movieAdded -> {
+                        errorMessage("The movie has already been added!")
+                    }
+                    else -> {
+                        saveMovieFavorited(reference, result)
+                    }
                 }
             }
 
@@ -69,20 +71,25 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    private fun checkMovieFavorited(reference: DatabaseReference, result: Result) {
+    private fun saveMovieFavorited(reference: DatabaseReference, result: Result) {
         val key = reference.push().key
-        reference.child(key!!).setValue(result)
 
-        reference.child(key).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val movieResult = dataSnapshot.getValue(Result::class.java)
-                stateFavorite.value = movieResult
-            }
+        key?.let {
+            reference.child(it).setValue(result)
 
-            override fun onCancelled(error: DatabaseError) {
-                errorMessage(error.message)
-            }
-        })
+            reference.child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    val movieResult = dataSnapshot.getValue(Result::class.java)
+                    stateFavorite.value = movieResult
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    errorMessage(error.message)
+                }
+            })
+        }
+
     }
 
     private fun errorMessage(message: String) {
