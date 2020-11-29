@@ -76,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun favoriteMovie(result: Result) {
-        viewModel.salvarFavorito(result)
+        viewModel.saveFavorite(result)
     }
 
     private fun showMessageFavorite(result: Result) {

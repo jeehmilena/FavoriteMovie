@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.jessica.yourfavoritemovies.Constants.FAVORITES_PATH
 import com.jessica.yourfavoritemovies.MovieRepository
 import com.jessica.yourfavoritemovies.MovieUtil.getUserId
@@ -15,6 +12,7 @@ import com.jessica.yourfavoritemovies.model.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = MovieRepository()
@@ -40,26 +38,51 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun salvarFavorito(result: Result) {
+    fun saveFavorite(result: Result) {
         val database = FirebaseDatabase.getInstance()
         val reference =
             database.getReference(getUserId(getApplication()).toString() + FAVORITES_PATH)
+
+        reference.orderByKey().addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var existe = false
+
+                for (resultSnapshot in dataSnapshot.children) {
+                    val firebaseResult = resultSnapshot.getValue(Result::class.java)
+
+                    if (firebaseResult?.id != null &&
+                        firebaseResult.id == result.id
+                    ) {
+                        existe = true
+                    }
+                }
+
+                if (existe) {
+                    errorMessage("The movie has already been added!")
+
+                } else {
+                    checkMovieFavorited(reference, result)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+
+    private fun checkMovieFavorited(reference: DatabaseReference, result: Result) {
         val key = reference.push().key
+        reference.child(key!!).setValue(result)
 
-        key?.let {
-            reference.child(it).setValue(result)
-            reference.child(key).addValueEventListener(object : ValueEventListener {
+        reference.child(key).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val movieResult = dataSnapshot.getValue(Result::class.java)
+                stateFavorite.value = movieResult
+            }
 
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val movieResult = dataSnapshot.getValue(Result::class.java)
-                    stateFavorite.value = movieResult
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    errorMessage(error.message)
-                }
-            })
-        }
+            override fun onCancelled(error: DatabaseError) {
+                errorMessage(error.message)
+            }
+        })
     }
 
     private fun errorMessage(message: String) {
